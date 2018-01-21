@@ -197,116 +197,135 @@ _common_attrs = {
 }
 
 _k8s_object = rule(
-    attrs = _add_dicts({
-        "template": attr.label(
-            allow_files = [
-                ".yaml",
-                ".json",
-            ],
-            single_file = True,
-            mandatory = True,
-        ),
-        "images": attr.string_dict(),
-        # Implicit dependencies.
-        "image_targets": attr.label_list(allow_files = True),
-        "image_target_strings": attr.string_list(),
-        "_template": attr.label(
-            default = Label("//k8s:resolve.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs, _layer_tools),
+    attrs = _add_dicts(
+        {
+            "template": attr.label(
+                allow_files = [
+                    ".yaml",
+                    ".json",
+                ],
+                single_file = True,
+                mandatory = True,
+            ),
+            "images": attr.string_dict(),
+            # Implicit dependencies.
+            "image_targets": attr.label_list(allow_files = True),
+            "image_target_strings": attr.string_list(),
+            "_template": attr.label(
+                default = Label("//k8s:resolve.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+        _layer_tools,
+    ),
     executable = True,
     implementation = _impl,
 )
 
 _k8s_object_apply = rule(
-    attrs = _add_dicts({
-        "resolved": attr.label(
-            cfg = "target",
-            executable = True,
-            allow_files = True,
-        ),
-        "_template": attr.label(
-            default = Label("//k8s:apply.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs),
+    attrs = _add_dicts(
+        {
+            "resolved": attr.label(
+                cfg = "target",
+                executable = True,
+                allow_files = True,
+            ),
+            "_template": attr.label(
+                default = Label("//k8s:apply.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+    ),
     executable = True,
     implementation = _common_impl,
 )
 
 _k8s_object_create = rule(
-    attrs = _add_dicts({
-        "resolved": attr.label(
-            cfg = "target",
-            executable = True,
-            allow_files = True,
-        ),
-        "_template": attr.label(
-            default = Label("//k8s:create.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs),
+    attrs = _add_dicts(
+        {
+            "resolved": attr.label(
+                cfg = "target",
+                executable = True,
+                allow_files = True,
+            ),
+            "_template": attr.label(
+                default = Label("//k8s:create.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+    ),
     executable = True,
     implementation = _common_impl,
 )
 
 _k8s_object_replace = rule(
-    attrs = _add_dicts({
-        "resolved": attr.label(
-            cfg = "target",
-            executable = True,
-            allow_files = True,
-        ),
-        "_template": attr.label(
-            default = Label("//k8s:replace.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs),
+    attrs = _add_dicts(
+        {
+            "resolved": attr.label(
+                cfg = "target",
+                executable = True,
+                allow_files = True,
+            ),
+            "_template": attr.label(
+                default = Label("//k8s:replace.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+    ),
     executable = True,
     implementation = _common_impl,
 )
 
 _k8s_object_describe = rule(
-    attrs = _add_dicts({
-        "unresolved": attr.label(
-            allow_files = [
-                ".yaml",
-                ".json",
-            ],
-            single_file = True,
-            mandatory = True,
-        ),
-        "_template": attr.label(
-            default = Label("//k8s:describe.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs),
+    attrs = _add_dicts(
+        {
+            "unresolved": attr.label(
+                allow_files = [
+                    ".yaml",
+                    ".json",
+                ],
+                single_file = True,
+                mandatory = True,
+            ),
+            "_template": attr.label(
+                default = Label("//k8s:describe.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+    ),
     executable = True,
     implementation = _common_impl,
 )
 
 _k8s_object_delete = rule(
-    attrs = _add_dicts({
-        "unresolved": attr.label(
-            allow_files = [
-                ".yaml",
-                ".json",
-            ],
-            single_file = True,
-            mandatory = True,
-        ),
-        "_template": attr.label(
-            default = Label("//k8s:delete.sh.tpl"),
-            single_file = True,
-            allow_files = True,
-        ),
-    }, _common_attrs),
+    attrs = _add_dicts(
+        {
+            "unresolved": attr.label(
+                allow_files = [
+                    ".yaml",
+                    ".json",
+                ],
+                single_file = True,
+                mandatory = True,
+            ),
+            "_template": attr.label(
+                default = Label("//k8s:delete.sh.tpl"),
+                single_file = True,
+                allow_files = True,
+            ),
+        },
+        _common_attrs,
+    ),
     executable = True,
     implementation = _common_impl,
 )
